@@ -1,0 +1,8 @@
+{
+  "ai_models": {
+    "schema": "ai_models.entity.schema.json"
+  },
+  "coderv3_feb2025": {
+    "schema": "coderv3_feb2025.entity.schema.json"
+  }
+}

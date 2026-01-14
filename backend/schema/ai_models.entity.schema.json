@@ -1,0 +1,743 @@
+{
+  "database": "ai_models",
+  "tables": {
+    "admin_notes": {
+      "entity": "AdminNote",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "AdminNote.id"
+      },
+      "columns": {
+        "id": "int",
+        "title": "varchar",
+        "body": "text",
+        "created_by": "int",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {}
+    },
+    "assignment_submissions": {
+      "entity": "AssignmentSubmission",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "AssignmentSubmission.id"
+      },
+      "columns": {
+        "id": "int",
+        "assignment_id": "int",
+        "student_id": "int",
+        "submission_text": "text",
+        "file_path": "varchar",
+        "submitted_at": "timestamp",
+        "points_obtained": "decimal",
+        "feedback": "text"
+      },
+      "foreignKeys": {
+        "assignment_id": {
+          "referencesEntity": "Assignment",
+          "referencesEntityKey": "Assignment.id",
+          "confidence": "high"
+        },
+        "student_id": {
+          "referencesEntity": "Student",
+          "referencesEntityKey": "Student.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "assignments": {
+      "entity": "Assignment",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Assignment.id"
+      },
+      "columns": {
+        "id": "int",
+        "title": "varchar",
+        "description": "text",
+        "subject_id": "int",
+        "due_date": "datetime",
+        "max_points": "int",
+        "created_by": "int",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "subject_id": {
+          "referencesEntity": "Subject",
+          "referencesEntityKey": "Subject.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "attendance": {
+      "entity": "Attendance",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Attendance.id"
+      },
+      "columns": {
+        "id": "int",
+        "student_id": "int",
+        "subject_id": "int",
+        "date": "date",
+        "status": "enum",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "student_id": {
+          "referencesEntity": "Student",
+          "referencesEntityKey": "Student.id",
+          "confidence": "high"
+        },
+        "subject_id": {
+          "referencesEntity": "Subject",
+          "referencesEntityKey": "Subject.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "companies": {
+      "entity": "Companie",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Companie.id"
+      },
+      "columns": {
+        "id": "int",
+        "name": "varchar",
+        "industry": "varchar",
+        "website": "varchar",
+        "contact_email": "varchar",
+        "phone": "varchar",
+        "address": "text",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {}
+    },
+    "departments": {
+      "entity": "Department",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Department.id"
+      },
+      "columns": {
+        "id": "int",
+        "name": "varchar",
+        "head": "varchar",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {}
+    },
+    "documents": {
+      "entity": "Document",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Document.id"
+      },
+      "columns": {
+        "id": "int",
+        "filename": "varchar",
+        "document_id": "varchar",
+        "collection_name": "varchar",
+        "file_path": "varchar",
+        "uploaded_at": "timestamp"
+      },
+      "foreignKeys": {
+        "document_id": {
+          "referencesEntity": "Document",
+          "referencesEntityKey": "Document.id",
+          "confidence": "medium"
+        }
+      }
+    },
+    "exams": {
+      "entity": "Exam",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Exam.id"
+      },
+      "columns": {
+        "id": "int",
+        "name": "varchar",
+        "subject_id": "int",
+        "exam_date": "date",
+        "max_marks": "int",
+        "created_by": "int",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "subject_id": {
+          "referencesEntity": "Subject",
+          "referencesEntityKey": "Subject.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "highlights": {
+      "entity": "Highlight",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Highlight.id"
+      },
+      "columns": {
+        "id": "int",
+        "user_id": "int",
+        "course_id": "int",
+        "topic_id": "int",
+        "material_id": "int",
+        "topic": "longtext",
+        "subtopic": "longtext",
+        "text": "longtext",
+        "analysis": "longtext",
+        "notes": "longtext",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "user_id": {
+          "referencesEntity": "User",
+          "referencesEntityKey": "User.id",
+          "confidence": "medium"
+        }
+      }
+    },
+    "knex_migrations": {
+      "entity": "KnexMigration",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "KnexMigration.id"
+      },
+      "columns": {
+        "id": "int",
+        "name": "varchar",
+        "batch": "int",
+        "migration_time": "timestamp"
+      },
+      "foreignKeys": {}
+    },
+    "knex_migrations_lock": {
+      "entity": "KnexMigrationsLock",
+      "primaryKey": {
+        "column": "index",
+        "entityKey": "KnexMigrationsLock.id"
+      },
+      "columns": {
+        "index": "int",
+        "is_locked": "int"
+      },
+      "foreignKeys": {}
+    },
+    "marks": {
+      "entity": "Mark",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Mark.id"
+      },
+      "columns": {
+        "id": "int",
+        "student_id": "int",
+        "exam_id": "int",
+        "subject_id": "int",
+        "marks_obtained": "decimal",
+        "grade": "char",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "student_id": {
+          "referencesEntity": "Student",
+          "referencesEntityKey": "Student.id",
+          "confidence": "high"
+        },
+        "exam_id": {
+          "referencesEntity": "Exam",
+          "referencesEntityKey": "Exam.id",
+          "confidence": "high"
+        },
+        "subject_id": {
+          "referencesEntity": "Subject",
+          "referencesEntityKey": "Subject.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "placements": {
+      "entity": "Placement",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Placement.id"
+      },
+      "columns": {
+        "id": "int",
+        "student_id": "int",
+        "company_id": "int",
+        "package": "decimal",
+        "position": "varchar",
+        "placement_date": "date",
+        "status": "enum",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "student_id": {
+          "referencesEntity": "Student",
+          "referencesEntityKey": "Student.id",
+          "confidence": "high"
+        },
+        "company_id": {
+          "referencesEntity": "Companie",
+          "referencesEntityKey": "Companie.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "projects": {
+      "entity": "Project",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Project.id"
+      },
+      "columns": {
+        "id": "int",
+        "title": "varchar",
+        "description": "text",
+        "student_id": "int",
+        "subject_id": "int",
+        "technologies": "text",
+        "github_url": "varchar",
+        "start_date": "date",
+        "end_date": "date",
+        "status": "enum",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "student_id": {
+          "referencesEntity": "Student",
+          "referencesEntityKey": "Student.id",
+          "confidence": "high"
+        },
+        "subject_id": {
+          "referencesEntity": "Subject",
+          "referencesEntityKey": "Subject.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "qa_data": {
+      "entity": "QaData",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "QaData.id"
+      },
+      "columns": {
+        "id": "int",
+        "course_id": "int",
+        "topic_id": "int",
+        "material_id": "int",
+        "topic": "longtext",
+        "subtopic": "longtext",
+        "question": "longtext",
+        "answer": "longtext",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {}
+    },
+    "resumes": {
+      "entity": "Resume",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Resume.id"
+      },
+      "columns": {
+        "id": "int",
+        "student_id": "int",
+        "file_path": "varchar",
+        "skills": "text",
+        "experience": "text",
+        "education": "text",
+        "certifications": "text",
+        "is_active": "tinyint",
+        "created_at": "timestamp",
+        "updated_at": "timestamp"
+      },
+      "foreignKeys": {
+        "student_id": {
+          "referencesEntity": "Student",
+          "referencesEntityKey": "Student.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "role_permissions": {
+      "entity": "RolePermission",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "RolePermission.id"
+      },
+      "columns": {
+        "id": "int",
+        "role_id": "int",
+        "resource": "varchar",
+        "can_create": "tinyint",
+        "can_read": "tinyint",
+        "can_update": "tinyint",
+        "can_delete": "tinyint"
+      },
+      "foreignKeys": {
+        "role_id": {
+          "referencesEntity": "Role",
+          "referencesEntityKey": "Role.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "roles": {
+      "entity": "Role",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Role.id"
+      },
+      "columns": {
+        "id": "int",
+        "name": "varchar",
+        "description": "varchar"
+      },
+      "foreignKeys": {}
+    },
+    "staff": {
+      "entity": "Staff",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Staff.id"
+      },
+      "columns": {
+        "id": "int",
+        "staff_code": "varchar",
+        "name": "varchar",
+        "department_id": "int",
+        "designation": "varchar",
+        "contact": "varchar",
+        "email": "varchar",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "department_id": {
+          "referencesEntity": "Department",
+          "referencesEntityKey": "Department.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "students": {
+      "entity": "Student",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Student.id"
+      },
+      "columns": {
+        "id": "int",
+        "roll_no": "varchar",
+        "name": "varchar",
+        "department_id": "int",
+        "year": "int",
+        "section": "char",
+        "dob": "date",
+        "contact": "varchar",
+        "address": "text",
+        "cgpa": "decimal",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "department_id": {
+          "referencesEntity": "Department",
+          "referencesEntityKey": "Department.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "subjects": {
+      "entity": "Subject",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "Subject.id"
+      },
+      "columns": {
+        "id": "int",
+        "name": "varchar",
+        "code": "varchar",
+        "department_id": "int",
+        "staff_id": "int",
+        "semester": "int",
+        "credits": "int",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "department_id": {
+          "referencesEntity": "Department",
+          "referencesEntityKey": "Department.id",
+          "confidence": "high"
+        },
+        "staff_id": {
+          "referencesEntity": "Staff",
+          "referencesEntityKey": "Staff.id",
+          "confidence": "high"
+        }
+      }
+    },
+    "super_admin_logs": {
+      "entity": "SuperAdminLog",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "SuperAdminLog.id"
+      },
+      "columns": {
+        "id": "int",
+        "action": "varchar",
+        "details": "text",
+        "performed_by": "int",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {}
+    },
+    "users": {
+      "entity": "User",
+      "primaryKey": {
+        "column": "id",
+        "entityKey": "User.id"
+      },
+      "columns": {
+        "id": "int",
+        "username": "varchar",
+        "password_hash": "varchar",
+        "email": "varchar",
+        "role_id": "int",
+        "person_type": "enum",
+        "person_id": "int",
+        "created_at": "timestamp"
+      },
+      "foreignKeys": {
+        "role_id": {
+          "referencesEntity": "Role",
+          "referencesEntityKey": "Role.id",
+          "confidence": "high"
+        }
+      }
+    }
+  },
+  "entityIndex": {
+    "AdminNote": {
+      "primaryKey": "AdminNote.id",
+      "tables": [
+        "admin_notes"
+      ],
+      "referencedBy": []
+    },
+    "AssignmentSubmission": {
+      "primaryKey": "AssignmentSubmission.id",
+      "tables": [
+        "assignment_submissions"
+      ],
+      "referencedBy": []
+    },
+    "Assignment": {
+      "primaryKey": "Assignment.id",
+      "tables": [
+        "assignments"
+      ],
+      "referencedBy": [
+        "assignment_submissions.assignment_id"
+      ]
+    },
+    "Student": {
+      "primaryKey": "Student.id",
+      "tables": [
+        "students"
+      ],
+      "referencedBy": [
+        "assignment_submissions.student_id",
+        "attendance.student_id",
+        "marks.student_id",
+        "placements.student_id",
+        "projects.student_id",
+        "resumes.student_id"
+      ]
+    },
+    "Subject": {
+      "primaryKey": "Subject.id",
+      "tables": [
+        "subjects"
+      ],
+      "referencedBy": [
+        "assignments.subject_id",
+        "attendance.subject_id",
+        "exams.subject_id",
+        "marks.subject_id",
+        "projects.subject_id"
+      ]
+    },
+    "Attendance": {
+      "primaryKey": "Attendance.id",
+      "tables": [
+        "attendance"
+      ],
+      "referencedBy": []
+    },
+    "Companie": {
+      "primaryKey": "Companie.id",
+      "tables": [
+        "companies"
+      ],
+      "referencedBy": [
+        "placements.company_id"
+      ]
+    },
+    "Department": {
+      "primaryKey": "Department.id",
+      "tables": [
+        "departments"
+      ],
+      "referencedBy": [
+        "staff.department_id",
+        "students.department_id",
+        "subjects.department_id"
+      ]
+    },
+    "Document": {
+      "primaryKey": "Document.id",
+      "tables": [
+        "documents"
+      ],
+      "referencedBy": [
+        "documents.document_id"
+      ]
+    },
+    "Exam": {
+      "primaryKey": "Exam.id",
+      "tables": [
+        "exams"
+      ],
+      "referencedBy": [
+        "marks.exam_id"
+      ]
+    },
+    "Highlight": {
+      "primaryKey": "Highlight.id",
+      "tables": [
+        "highlights"
+      ],
+      "referencedBy": []
+    },
+    "User": {
+      "primaryKey": "User.id",
+      "tables": [
+        "users"
+      ],
+      "referencedBy": [
+        "highlights.user_id"
+      ]
+    },
+    "KnexMigration": {
+      "primaryKey": "KnexMigration.id",
+      "tables": [
+        "knex_migrations"
+      ],
+      "referencedBy": []
+    },
+    "KnexMigrationsLock": {
+      "primaryKey": "KnexMigrationsLock.id",
+      "tables": [
+        "knex_migrations_lock"
+      ],
+      "referencedBy": []
+    },
+    "Mark": {
+      "primaryKey": "Mark.id",
+      "tables": [
+        "marks"
+      ],
+      "referencedBy": []
+    },
+    "Placement": {
+      "primaryKey": "Placement.id",
+      "tables": [
+        "placements"
+      ],
+      "referencedBy": []
+    },
+    "Project": {
+      "primaryKey": "Project.id",
+      "tables": [
+        "projects"
+      ],
+      "referencedBy": []
+    },
+    "QaData": {
+      "primaryKey": "QaData.id",
+      "tables": [
+        "qa_data"
+      ],
+      "referencedBy": []
+    },
+    "Resume": {
+      "primaryKey": "Resume.id",
+      "tables": [
+        "resumes"
+      ],
+      "referencedBy": []
+    },
+    "RolePermission": {
+      "primaryKey": "RolePermission.id",
+      "tables": [
+        "role_permissions"
+      ],
+      "referencedBy": []
+    },
+    "Role": {
+      "primaryKey": "Role.id",
+      "tables": [
+        "roles"
+      ],
+      "referencedBy": [
+        "role_permissions.role_id",
+        "users.role_id"
+      ]
+    },
+    "Staff": {
+      "primaryKey": "Staff.id",
+      "tables": [
+        "staff"
+      ],
+      "referencedBy": [
+        "subjects.staff_id"
+      ]
+    },
+    "SuperAdminLog": {
+      "primaryKey": "SuperAdminLog.id",
+      "tables": [
+        "super_admin_logs"
+      ],
+      "referencedBy": []
+    }
+  },
+  "relationshipIndex": {
+    "assignment_submissions.assignment_id": "Assignment.id",
+    "assignment_submissions.student_id": "Student.id",
+    "assignments.subject_id": "Subject.id",
+    "attendance.student_id": "Student.id",
+    "attendance.subject_id": "Subject.id",
+    "documents.document_id": "Document.id",
+    "exams.subject_id": "Subject.id",
+    "highlights.user_id": "User.id",
+    "marks.student_id": "Student.id",
+    "marks.exam_id": "Exam.id",
+    "marks.subject_id": "Subject.id",
+    "placements.student_id": "Student.id",
+    "placements.company_id": "Companie.id",
+    "projects.student_id": "Student.id",
+    "projects.subject_id": "Subject.id",
+    "resumes.student_id": "Student.id",
+    "role_permissions.role_id": "Role.id",
+    "staff.department_id": "Department.id",
+    "students.department_id": "Department.id",
+    "subjects.department_id": "Department.id",
+    "subjects.staff_id": "Staff.id",
+    "users.role_id": "Role.id"
+  }
+}
